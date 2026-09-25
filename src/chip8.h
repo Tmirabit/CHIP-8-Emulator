@@ -2,6 +2,8 @@
 #ifndef CHIP8_H
 #define CHIP8_H
 
+#include <stdbool.h>
+
 typedef struct{
 	
 	unsigned short opcode; 
@@ -19,12 +21,20 @@ typedef struct{
 	unsigned short sp;
 
 	unsigned char key[16];
+	
+	bool waiting_for_key;
+	unsigned char key_register;
+
+	bool drawFlag;
+	
 } Chip8;
 
 // Initialize
 void chip8_init(Chip8 *chip8);
 
 // Emulate Cycle
-void chip8_Cylcle(Chip8 *chip8);
+void chip8_Cycle(Chip8 *chip8);
+
+bool chip8_load_game(Chip8 *chip8, const char *filename);
 
 #endif // chip8.h
